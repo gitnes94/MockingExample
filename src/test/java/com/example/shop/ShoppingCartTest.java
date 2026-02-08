@@ -142,4 +142,31 @@ class ShoppingCartTest {
 
         assertThat(cart.getTotal()).isCloseTo(16.2, within(0.01));
     }
+
+    @Test
+    @DisplayName("Ska kasta exception när man lägger till null vara")
+    void shouldThrowExceptionWhenAddingNullItem() {
+        assertThatThrownBy(() -> cart.addItem(null))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    @DisplayName("Ska kasta exception vid negativ kvantitet")
+    void shouldThrowExceptionForNegativeQuantity() {
+        assertThatThrownBy(() -> cart.addItem(apple, -1))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    @DisplayName("Ska returnera 0 för tom cart")
+    void shouldReturnZeroForEmptyCart() {
+        assertThat(cart.getTotal()).isEqualTo(0.0);
+    }
+
+    @Test
+    @DisplayName("Ska hantera uppdatering av icke-existerande vara")
+    void shouldHandleUpdatingNonExistentItem() {
+        assertThatThrownBy(() -> cart.updateQuantity("999", 5))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
 }

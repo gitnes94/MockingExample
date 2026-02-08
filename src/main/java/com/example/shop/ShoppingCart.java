@@ -19,7 +19,7 @@ public class ShoppingCart {
     }
 
     public void addItem(Item item) {
-        items.put(item.getId(), 1);
+        addItem(item, 1);
     }
 
     public boolean isEmpty() {
@@ -35,9 +35,14 @@ public class ShoppingCart {
     }
 
     public void addItem(Item item, int quantity) {
+        if (item == null) {
+            throw new IllegalArgumentException("Item kan inte vara null");
+        }
         if (quantity <= 0) {
             throw new IllegalArgumentException("Kvantitet måste vara större än 0");
         }
+
+
         items.merge(item.getId(), quantity, Integer::sum);
     }
 
@@ -50,6 +55,9 @@ public class ShoppingCart {
     }
 
     public void updateQuantity(String itemId, int quantity) {
+        if (!items.containsKey(itemId)) {
+            throw new IllegalArgumentException("Varan finns inte i Shopping-carten");
+        }
         if (quantity < 0) {
             throw new IllegalArgumentException("Kvantitet kan inte vara negativ");
         }
