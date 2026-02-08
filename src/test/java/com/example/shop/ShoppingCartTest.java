@@ -27,4 +27,14 @@ class ShoppingCartTest {
         assertThat(cart.isEmpty()).isTrue();
         assertThat(cart.getItemCount()).isEqualTo(0);
     }
+
+    @Test
+    @DisplayName("Ska kunna lägga till en vara")
+    void shouldAddSingleItem() {
+        cart.addItem(apple);
+
+        assertThat(cart.isEmpty()).isFalse();
+        assertThat(cart.getItemCount()).isEqualTo(1);
+        assertThat(cart.containsItem(apple.id())).isTrue();
+    }
 }

@@ -1,7 +1,6 @@
 package com.example.shop;
 
 // Representerar en vara i shoppingcarten.
-
 public record Item(String id, String name, double price) {
     public Item {
         if (id == null || id.trim().isEmpty()) {
