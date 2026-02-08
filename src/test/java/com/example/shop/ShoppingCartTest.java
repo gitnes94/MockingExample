@@ -37,4 +37,15 @@ class ShoppingCartTest {
         assertThat(cart.getItemCount()).isEqualTo(1);
         assertThat(cart.containsItem(apple.id())).isTrue();
     }
+
+    @Test
+    @DisplayName("Ska kunna lägga till flera olika varor")
+    void shouldAddMultipleItems() {
+        cart.addItem(apple);
+        cart.addItem(banana);
+
+        assertThat(cart.getItemCount()).isEqualTo(2);
+        assertThat(cart.containsItem(apple.id())).isTrue();
+        assertThat(cart.containsItem(banana.id())).isTrue();
+    }
 }
