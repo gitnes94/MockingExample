@@ -78,4 +78,24 @@ class ShoppingCartTest {
         assertThat(cart.containsItem(apple.getId())).isFalse();
         assertThat(cart.getItemCount()).isEqualTo(1);
     }
+
+    @Test
+    @DisplayName("Ska kunna uppdatera kvantitet för en vara")
+    void shouldUpdateQuantity() {
+        cart.addItem(apple, 3);
+
+        cart.updateQuantity(apple.getId(), 5);
+
+        assertThat(cart.getQuantity(apple.getId())).isEqualTo(5);
+    }
+
+    @Test
+    @DisplayName("Ska ta bort vara när kvantitet sätts till 0")
+    void shouldRemoveItemWhenQuantitySetToZero() {
+        cart.addItem(apple);
+
+        cart.updateQuantity(apple.getId(), 0);
+
+        assertThat(cart.containsItem(apple.getId())).isFalse();
+    }
 }

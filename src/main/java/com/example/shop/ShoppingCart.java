@@ -36,4 +36,15 @@ public class ShoppingCart {
     public void removeItem(String itemId) {
         items.remove(itemId);
     }
+
+    public void updateQuantity(String itemId, int quantity) {
+        if (quantity < 0) {
+            throw new IllegalArgumentException("Kvantitet kan inte vara negativ");
+        }
+        if (quantity == 0) {
+            items.remove(itemId);
+        } else {
+            items.put(itemId, quantity);
+        }
+    }
 }
