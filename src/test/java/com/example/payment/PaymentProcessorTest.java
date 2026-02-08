@@ -26,6 +26,7 @@ import static org.mockito.Mockito.*;
  * - Singleton (DatabaseConnection.getInstance())
  * - SQL injection risk
  * - Omöjlig att testa
+ *
  * Efter refaktorering:
  * - Alla beroenden injiceras via constructor
  * - Använder interfaces istället för konkreta implementationer

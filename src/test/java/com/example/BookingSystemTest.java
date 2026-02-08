@@ -22,7 +22,7 @@ import static org.assertj.core.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
-/**
+/*
  * Enhetstester för BookingSystem-klassen.
  * Testar alla metoder med både lyckade och misslyckade scenarios.
  * Använder Mockito för att mocka beroenden och AssertJ för assertions.
