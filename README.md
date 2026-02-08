@@ -37,14 +37,6 @@ TDD-implementation av en shoppingcart.
 mvn clean test
 ```
 
-## Generera coverage-rapport
-
-```bash
-mvn clean test jacoco:report
-```
-
-Rapport finns i `target/site/jacoco/index.html`
-
 ## Testresultat
 
 ```
