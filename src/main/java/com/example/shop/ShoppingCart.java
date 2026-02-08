@@ -32,4 +32,8 @@ public class ShoppingCart {
     public int getQuantity(String itemId) {
         return items.getOrDefault(itemId, 0);
     }
+
+    public void removeItem(String itemId) {
+        items.remove(itemId);
+    }
 }

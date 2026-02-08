@@ -66,4 +66,16 @@ class ShoppingCartTest {
 
         assertThat(cart.getQuantity(apple.getId())).isEqualTo(5);
     }
+
+    @Test
+    @DisplayName("Ska kunna ta bort en vara från carten")
+    void shouldRemoveItem() {
+        cart.addItem(apple);
+        cart.addItem(banana);
+
+        cart.removeItem(apple.getId());
+
+        assertThat(cart.containsItem(apple.getId())).isFalse();
+        assertThat(cart.getItemCount()).isEqualTo(1);
+    }
 }
