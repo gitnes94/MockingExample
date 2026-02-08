@@ -35,7 +35,7 @@ class ShoppingCartTest {
 
         assertThat(cart.isEmpty()).isFalse();
         assertThat(cart.getItemCount()).isEqualTo(1);
-        assertThat(cart.containsItem(apple.id())).isTrue();
+        assertThat(cart.containsItem(apple.getId())).isTrue();
     }
 
     @Test
@@ -45,7 +45,17 @@ class ShoppingCartTest {
         cart.addItem(banana);
 
         assertThat(cart.getItemCount()).isEqualTo(2);
-        assertThat(cart.containsItem(apple.id())).isTrue();
-        assertThat(cart.containsItem(banana.id())).isTrue();
+        assertThat(cart.containsItem(apple.getId())).isTrue();
+        assertThat(cart.containsItem(banana.getId())).isTrue();
+    }
+
+    @Test
+    @DisplayName("Ska öka kvantitet när samma vara läggs till igen")
+    void shouldIncreaseQuantityWhenAddingSameItem() {
+        cart.addItem(apple);
+        cart.addItem(apple);
+
+        assertThat(cart.getItemCount()).isEqualTo(1); // Fortfarande 1 unik vara
+        assertThat(cart.getQuantity(apple.getId())).isEqualTo(2);
     }
 }

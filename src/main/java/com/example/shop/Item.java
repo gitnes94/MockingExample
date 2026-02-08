@@ -1,8 +1,14 @@
 package com.example.shop;
 
-// Representerar en vara i shoppingcarten.
-public record Item(String id, String name, double price) {
-    public Item {
+/**
+ * Representerar en vara i shoppingcarten.
+ */
+public class Item {
+    private final String id;
+    private final String name;
+    private final double price;
+
+    public Item(String id, String name, double price) {
         if (id == null || id.trim().isEmpty()) {
             throw new IllegalArgumentException("ID kan inte vara null eller tomt");
         }
@@ -13,6 +19,21 @@ public record Item(String id, String name, double price) {
             throw new IllegalArgumentException("Price kan inte vara negativt");
         }
 
+        this.id = id;
+        this.name = name;
+        this.price = price;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public double getPrice() {
+        return price;
     }
 
     @Override
