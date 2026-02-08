@@ -1,8 +1,7 @@
 package com.example.payment;
 
-/**
+/*
  * Representerar svaret från Payment API.
- *
  * Detta motsvarar PaymentApiResponse från originalkoden.
  */
 public class PaymentApiResponse {

@@ -3,12 +3,12 @@ package com.example.payment;
 /*
  * Refaktorerad PaymentProcessor-klass som är testbar genom dependency injection.
  *
- * ORIGINAL KOD (utkommenterad nedan) hade följande problem:
+ * ORIGINAL KOD (längst ner) hade följande problem:
  * - Hård-kodat API_KEY i koden
  * - Direkt beroende till PaymentApi (statisk metod)
  * - Direkt beroende till DatabaseConnection (singleton)
  * - Direkt beroende till EmailService (statisk metod)
- * - Omöjligt att testa utan externa beroenden
+ * - Omöjligt att testa utan externa dependencies.
  *
  * REFAKTORERING:
  * 1. Extraherade PaymentGateway interface (ersätter PaymentApi)
@@ -23,9 +23,8 @@ public class PaymentProcessor {
     private final PaymentRepository paymentRepository;
     private final EmailNotificationService emailService;
 
-    /**
+    /*
      * Constructor för dependency injection.
-     *
      * @param paymentGateway Gateway för att processa betalningar (ersätter PaymentApi)
      * @param paymentRepository Repository för att spara betalningar (ersätter DatabaseConnection)
      * @param emailService Service för att skicka emails (ersätter EmailService)
@@ -48,11 +47,9 @@ public class PaymentProcessor {
         this.emailService = emailService;
     }
 
-    /**
+    /*
      * Processar en betalning.
-     *
      * Denna metod matchar originalmetodens signatur: processPayment(double amount)
-     *
      * @param amount Belopp som ska betalas
      * @return true om betalningen lyckades, annars false
      */
@@ -78,7 +75,7 @@ public class PaymentProcessor {
         return response.isSuccess();
     }
 
-    /**
+    /*
      * Överlagrad metod för att stödja custom email.
      *
      * @param amount Belopp

@@ -18,16 +18,14 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
 
-/**
+/*
  * Enhetstester för refaktorerade PaymentProcessor-klassen.
- *
  * Originalklassen hade följande problem:
  * - Hård-kodat API_KEY
  * - Statiska metoder (PaymentApi.charge, EmailService.sendPaymentConfirmation)
  * - Singleton (DatabaseConnection.getInstance())
  * - SQL injection risk
  * - Omöjlig att testa
- *
  * Efter refaktorering:
  * - Alla beroenden injiceras via constructor
  * - Använder interfaces istället för konkreta implementationer
