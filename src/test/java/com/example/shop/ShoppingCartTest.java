@@ -52,10 +52,18 @@ class ShoppingCartTest {
     @Test
     @DisplayName("Ska öka kvantitet när samma vara läggs till igen")
     void shouldIncreaseQuantityWhenAddingSameItem() {
-        cart.addItem(apple);
-        cart.addItem(apple);
+        cart.addItem(apple, 1);
+        cart.addItem(apple, 1);
 
         assertThat(cart.getItemCount()).isEqualTo(1); // Fortfarande 1 unik vara
         assertThat(cart.getQuantity(apple.getId())).isEqualTo(2);
+    }
+
+    @Test
+    @DisplayName("Ska kunna lägga till vara med specifik kvantitet")
+    void shouldAddItemWithQuantity() {
+        cart.addItem(apple, 5);
+
+        assertThat(cart.getQuantity(apple.getId())).isEqualTo(5);
     }
 }
