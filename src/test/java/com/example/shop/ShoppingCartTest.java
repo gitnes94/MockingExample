@@ -12,11 +12,10 @@ class ShoppingCartTest {
     private ShoppingCart cart;
     private Item apple;
     private Item banana;
-    private ItemRegistry registry;
 
     @BeforeEach
     void setUp() {
-        registry = new ItemRegistry();
+        ItemRegistry registry = new ItemRegistry();
         cart = new ShoppingCart(registry);
 
         apple = new Item("1", "Apple", 10.0);
@@ -120,5 +119,27 @@ class ShoppingCartTest {
         cart.addItem(banana, 3); // 3 * 5 = 15
 
         assertThat(cart.getTotal()).isEqualTo(35.0);
+    }
+
+    @Test
+    @DisplayName("Ska applicera procentrabatt")
+    void shouldApplyPercentageDiscount() {
+        cart.addItem(apple, 2);  // 20.0
+
+        Discount discount = new PercentageDiscount(10); // 10% off
+        cart.applyDiscount(discount);
+
+        assertThat(cart.getTotal()).isEqualTo(18.0);
+    }
+
+    @Test
+    @DisplayName("Ska kunna applicera flera rabatter")
+    void shouldApplyMultipleDiscounts() {
+        cart.addItem(apple, 2);  // 20.0
+
+        cart.applyDiscount(new PercentageDiscount(10)); // 18.0
+        cart.applyDiscount(new PercentageDiscount(10)); // 16.2
+
+        assertThat(cart.getTotal()).isCloseTo(16.2, within(0.01));
     }
 }

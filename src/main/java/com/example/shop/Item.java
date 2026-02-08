@@ -1,6 +1,6 @@
 package com.example.shop;
 
-/**
+/*
  * Representerar en vara i shoppingcarten.
  */
 public class Item {

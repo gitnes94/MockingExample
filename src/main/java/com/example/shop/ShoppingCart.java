@@ -1,14 +1,21 @@
 package com.example.shop;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ShoppingCart {
     private final ItemRegistry registry;
     private final Map<String, Integer> items = new HashMap<>();
+    private final List<Discount> discounts = new ArrayList<>();
 
     public ShoppingCart(ItemRegistry registry) {
         this.registry = registry;
+    }
+
+    public void applyDiscount(Discount discount) {
+        discounts.add(discount);
     }
 
     public void addItem(Item item) {
@@ -54,11 +61,18 @@ public class ShoppingCart {
     }
 
     public double getTotal() {
-        return items.entrySet().stream()
+        double subtotal = items.entrySet().stream()
                 .mapToDouble(entry -> {
                     Item item = registry.getItem(entry.getKey());
                     return item.getPrice() * entry.getValue();
                 })
                 .sum();
+
+        double total = subtotal;
+        for (Discount discount : discounts) {
+            total = discount.apply(total);
+        }
+
+        return total;
     }
 }
