@@ -4,7 +4,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ShoppingCart {
+    private final ItemRegistry registry;
     private final Map<String, Integer> items = new HashMap<>();
+
+    public ShoppingCart(ItemRegistry registry) {
+        this.registry = registry;
+    }
 
     public void addItem(Item item) {
         items.put(item.getId(), 1);
@@ -46,5 +51,14 @@ public class ShoppingCart {
         } else {
             items.put(itemId, quantity);
         }
+    }
+
+    public double getTotal() {
+        return items.entrySet().stream()
+                .mapToDouble(entry -> {
+                    Item item = registry.getItem(entry.getKey());
+                    return item.getPrice() * entry.getValue();
+                })
+                .sum();
     }
 }

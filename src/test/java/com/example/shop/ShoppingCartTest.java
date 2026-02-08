@@ -12,12 +12,18 @@ class ShoppingCartTest {
     private ShoppingCart cart;
     private Item apple;
     private Item banana;
+    private ItemRegistry registry;
 
     @BeforeEach
     void setUp() {
-        cart = new ShoppingCart();
+        registry = new ItemRegistry();
+        cart = new ShoppingCart(registry);
+
         apple = new Item("1", "Apple", 10.0);
         banana = new Item("2", "Banana", 5.0);
+
+        registry.registerItem(apple);
+        registry.registerItem(banana);
     }
 
     @Test
@@ -97,5 +103,22 @@ class ShoppingCartTest {
         cart.updateQuantity(apple.getId(), 0);
 
         assertThat(cart.containsItem(apple.getId())).isFalse();
+    }
+
+    @Test
+    @DisplayName("Ska beräkna totalpris för en vara")
+    void shouldCalculateTotalForSingleItem() {
+        cart.addItem(apple, 3);
+
+        assertThat(cart.getTotal()).isEqualTo(30.0);
+    }
+
+    @Test
+    @DisplayName("Ska beräkna totalpris för flera varor")
+    void shouldCalculateTotalForMultipleItems() {
+        cart.addItem(apple, 2);  // 2 * 10 = 20
+        cart.addItem(banana, 3); // 3 * 5 = 15
+
+        assertThat(cart.getTotal()).isEqualTo(35.0);
     }
 }
