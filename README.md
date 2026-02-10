@@ -42,3 +42,18 @@ mvn clean test
 ```
 Tests run: 89, Failures: 0, Errors: 0, Skipped: 0
 ```
+
+
+## Mutation testing
+
+```
+================================================================================
+- Statistics
+================================================================================
+>> Line Coverage (for mutated classes only): 167/184 (91%)
+>> 24 tests examined
+>> Generated 124 mutations Killed 97 (78%)
+>> Mutations with no coverage 16. Test strength 90%
+>> Ran 207 tests (1.67 tests per mutation)
+
+```
